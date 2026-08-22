@@ -70,9 +70,3 @@ outline: deep
 │   └── ui/                               # JSON UI（setting / pop_up / toast / pause_screen ...）
 └── README.md                             # 本文件
 ```
-
-## 开发说明
-
-- 模组脚本为 **Python 2.7**（网易 Mod SDK），禁止 Python 3 语法。
-- 本机无法直接运行脚本，验证方式 = 启动测试世界（`.mcdev.json` 已开启模组/UI 自动热重载），调试输出在客户端控制台。
-- 模组命名空间：`Script_NeteaseMod9sPMlz0K`（用于 `modMain.py` 绑定、`RegisterSystem` 名称及所有自定义事件名前缀）。
