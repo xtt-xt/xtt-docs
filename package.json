@@ -11,16 +11,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/xtt-xt/modapi-docs.git"
+    "url": "git+https://github.com/xtt-xt/xtt-docs.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
   "bugs": {
-    "url": "https://github.com/xtt-xt/modapi-docs/issues"
+    "url": "https://github.com/xtt-xt/xtt-docs/issues"
   },
-  "homepage": "https://github.com/xtt-xt/modapi-docs#readme",
+  "homepage": "https://github.com/xtt-xt/xtt-docs#readme",
   "devDependencies": {
     "vitepress": "^1.6.4"
   }
