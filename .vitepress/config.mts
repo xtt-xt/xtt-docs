@@ -21,6 +21,7 @@ export default defineConfig({
     sidebar: [
       {
         text: '目录',
+        collapsed: false,
         items: [
           { text: '主页', link: '/' },
           { text: '模组列表', link: '/mod-list' }
@@ -28,6 +29,7 @@ export default defineConfig({
       },
       {
         text: '通用模组前置（CardRegistry）',
+        collapsed: false,
         items: [
           { text: '模组介绍', link: '/dependency/' },
           { text: 'API 总览', link: '/dependency/api-overview' },
