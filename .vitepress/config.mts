@@ -25,6 +25,16 @@ export default defineConfig({
           { text: '主页', link: '/' },
           { text: '模组列表', link: '/mod-list' }
         ]
+      },
+      {
+        text: '设置界面框架（CardRegistry）',
+        items: [
+          { text: '模组介绍', link: '/xtt_dependency/' },
+          { text: 'API 总览', link: '/xtt_dependency/api-overview' },
+          { text: '客户端 API', link: '/xtt_dependency/api-client' },
+          { text: '服务端 API', link: '/xtt_dependency/api-server' },
+          { text: '事件', link: '/xtt_dependency/api-events' }
+        ]
       }
     ],
 

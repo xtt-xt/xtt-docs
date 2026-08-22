@@ -18,11 +18,7 @@ features:
     details: 查看所有模组的仓库地址和跳转文档
     link: /mod-list
 
-  - title: 占位
-    details: 占位
-    link: /占位
-
-  - title: 占位
-    details: 占位
-    link: /占位
+  - title: 设置界面框架（CardRegistry）
+    details: 网易我的世界基于卡片的设置界面框架，供其他模组注册卡片使用
+    link: /xtt_dependency/
 ---
