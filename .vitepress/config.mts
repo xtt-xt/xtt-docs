@@ -27,13 +27,13 @@ export default defineConfig({
         ]
       },
       {
-        text: '设置界面框架（CardRegistry）',
+        text: '通用模组前置（CardRegistry）',
         items: [
-          { text: '模组介绍', link: '/xtt_dependency/' },
-          { text: 'API 总览', link: '/xtt_dependency/api-overview' },
-          { text: '客户端 API', link: '/xtt_dependency/api-client' },
-          { text: '服务端 API', link: '/xtt_dependency/api-server' },
-          { text: '事件', link: '/xtt_dependency/api-events' }
+          { text: '模组介绍', link: '/dependency/' },
+          { text: 'API 总览', link: '/dependency/api-overview' },
+          { text: '客户端 API', link: '/dependency/api-client' },
+          { text: '服务端 API', link: '/dependency/api-server' },
+          { text: '事件', link: '/dependency/api-events' }
         ]
       }
     ],

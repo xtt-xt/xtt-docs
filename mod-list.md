@@ -3,17 +3,17 @@
 
 ## 已有api文档
 
-### 设置界面框架（CardRegistry）
+### 通用模组前置（CardRegistry）
 
-网易我的世界 Studio 附加包，提供一套基于卡片的设置界面框架（`CardRegistry`），供其他模组注册卡片使用。
+网易我的世界 Studio 前置模组，为其他模组提供一套基于卡片的设置界面框架（`CardRegistry`）。
 
 | 文档 | 链接 |
 |------|------|
-| 模组介绍 | [设置界面框架](/xtt_dependency/) |
-| API 总览 | [总览](/xtt_dependency/api-overview) |
-| 客户端 API | [客户端](/xtt_dependency/api-client) |
-| 服务端 API | [服务端](/xtt_dependency/api-server) |
-| 事件 | [事件](/xtt_dependency/api-events) |
+| 模组介绍 | [通用模组前置](/dependency/) |
+| API 总览 | [总览](/dependency/api-overview) |
+| 客户端 API | [客户端](/dependency/api-client) |
+| 服务端 API | [服务端](/dependency/api-server) |
+| 事件 | [事件](/dependency/api-events) |
 
 ## 已开源
 

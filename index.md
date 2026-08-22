@@ -18,7 +18,7 @@ features:
     details: 查看所有模组的仓库地址和跳转文档
     link: /mod-list
 
-  - title: 设置界面框架（CardRegistry）
-    details: 网易我的世界基于卡片的设置界面框架，供其他模组注册卡片使用
-    link: /xtt_dependency/
+  - title: 通用模组前置（CardRegistry）
+    details: 网易我的世界通用模组前置，为其他模组提供基于卡片的设置界面框架
+    link: /dependency/
 ---
