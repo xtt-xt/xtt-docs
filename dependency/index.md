@@ -14,8 +14,10 @@ outline: deep
 - **丰富内容项**：文字、按钮、开关、输入框、滑块、折叠菜单、重置按钮
 - **弹窗系统**：通用确认弹窗（内容超长自动滚动，支持自定义按钮）
 - **折叠菜单**：单选式下拉菜单，选中状态自动持久化
-- **Toast 提示**：顶部 / 右上 / 底部轻量提示，支持物品与图片图层、自定义文字与颜色、同位置排队播放
+- **Toast 提示**：顶部 / 右上 / 底部轻量提示，支持物品与图片图层、自定义文字与颜色、同位置排队播放；可自定义入场/出场音效与背景贴图（九宫格剪裁）
 - **设置持久化**：开关 / 输入框 / 锁定状态自动保存到本地存储
+- **调试日志开关**：客户端/服务端独立控制（单例 `dlog`），框架自带"设置配置"卡片提供开关
+- **导航跳转拦截**：可通过 `SettingsNavigateEvent` / `RegNavigateBlockCallback` / `UnregNavigateBlockCallback` / `IsNavigateBlocked` 拦截设置界面跳转
 - **外部接入**：通过 `CardRegistryApi` 统一导出全部公开 API
 
 ## 打开设置界面
@@ -27,7 +29,7 @@ outline: deep
 | **官方设置入口** | 暂停菜单 → 模组 → 本模组 → 点"打开设置"按钮，关闭官方界面并打开本模组设置界面 |
 | **导航 API** | 外部模组可直接调用 `OpenSettings(main_card_id, sub_key, middle_card_id)` 打开并导航到指定卡片，详见[导航 API](api-client#导航-api) |
 
-> 若要在游戏内以指令方式打开/导航（如给指定玩家或管理员操作），仍可使用 `/setting_open` 命令，详见[服务端 API](api-server)。
+> 若要在游戏内以指令方式打开/导航自己的设置界面，可使用 `/setting_open` 命令（对所有成员可用，但只作用于调用者自己），详见[服务端 API](api-server)。
 
 ## 快速开始（外部模组接入）
 
@@ -66,6 +68,8 @@ outline: deep
 │   │   ├── Client.py                     # MyClientSystem + 设置界面/弹窗/暂停界面等 UI 实现
 │   │   ├── Server.py                     # 服务端系统，处理 /setting_open 指令
 │   │   ├── SettingState.py               # 设置项持久化（ConfigCompClient 本地存储）
+│   │   ├── DebugLog.py                   # 调试日志开关（客户端/服务端独立控制）
+│   │   ├── setting.py                    # 框架自带"设置配置"卡片注册
 │   │   └── Toast.py                      # Toast 提示系统
 │   └── netease_commands/                 # 自定义指令定义（setting_open）
 ├── resource_pack_nka0OOhF/

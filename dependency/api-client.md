@@ -656,7 +656,7 @@ CreateContentInst("basic_settings", "client", "opt_main")\
 
 轻量提示系统：以**界面叠加层**方式显示（非弹窗，不打断游戏操作）。`top` / `top_right` 支持物品展示与图片两个图层（按需显示），三个位置均支持自定义文字与自定义文字颜色。进入(1s) → 停留(默认3s/可自定义) → 退出(1s) 三段动画，同一位置多个 toast 按调用顺序排队播放。
 
-### ShowToast(position, text="", color=None, icon=None, item_name=None, item_aux=0, is_enchanted=False, duration=3.0)
+全参数：`ShowToast(position, text="", color=None, icon=None, item_name=None, item_aux=0, is_enchanted=False, duration=3.0, enter_sound=None, exit_sound=None, background=None, nine_slice=None)`
 
 显示一个 toast 提示。
 
@@ -670,6 +670,20 @@ CreateContentInst("basic_settings", "client", "opt_main")\
 | item_aux | int | 否 | 物品附加值，默认 0 |
 | is_enchanted | bool | 否 | 是否显示附魔效果，默认 False |
 | duration | float | 否 | 停留时长（秒），默认 3 |
+| enter_sound | str | 否 | 自定义入场音效名；`None` 用位置默认，空串 `""` 不播（见下方音效表） |
+| exit_sound | str | 否 | 自定义出场音效名；`None` 用位置默认，空串 `""` 不播（见下方音效表） |
+| background | str | 否 | 自定义背景贴图路径（从 textures 开始，如 `"textures/ui/xxx"`）；`None` 用 JSON 默认背景 |
+| nine_slice | tuple | 否 | 背景九宫格剪裁 `(左, 右, 上, 下)`，启用原版九宫格拉伸；`None` 不启用 |
+
+#### 音效规则
+
+未指定 `enter_sound` / `exit_sound`（传 `None`）时按位置使用默认音效；传空串 `""` 则强制不播放；传入具体音效名则播放该音效。
+
+| 位置 | 默认入场音效 | 默认出场音效 |
+|------|--------------|--------------|
+| `ToastTop`（顶部） | `random.toast` | 无 |
+| `ToastTopRight`（右上角） | `random.toast_recipe_unlocking_in` | `random.toast_recipe_unlocking_out` |
+| `ToastUnder`（底部） | `random.toast` | 无 |
 
 #### 图层显隐规则
 
@@ -692,8 +706,13 @@ CreateContentInst("basic_settings", "client", "opt_main")\
 ```python
 def OnUIInitFinished(self, args):
     try:
-        from Script_NeteaseMod9sPMlz0K.CardRegistryApi import ShowToast, ToastTop
+        from Script_NeteaseMod9sPMlz0K.CardRegistryApi import ShowToast, ToastTop, ToastTopRight
+        # 基础用法：默认音效，自定义文字颜色 + 物品层
         ShowToast(ToastTop, "自定义文字", color=(1.0, 0.0, 0.0), item_name="minecraft:diamond")
+        # 自定义入场/出场音效与背景（含九宫格剪裁）
+        ShowToast(ToastTopRight, "获得成就", background="textures/ui/achievement_banner",
+                  nine_slice=(20, 20, 20, 20), enter_sound="random.toast",
+                  exit_sound="random.toast_recipe_unlocking_out")
     except ImportError:
         pass
 ```
@@ -893,7 +912,7 @@ count = ResetGroupSettings("basic_settings", "client", "opt_a")
 
 通过 `CardRegistryApi.OpenSettings` 打开设置 UI，并可选导航到指定卡片。
 
-> 外部模组如需打开/导航本设置界面，**直接调用本 API 即可**，无需在游戏内输入 `/setting_open` 指令。`/setting_open` 指令仅用于游戏内/管理侧触发（由服务端处理后同样转发到 `OpenSettings`），详见[服务端 API](api-server)。
+> 外部模组如需打开/导航本设置界面，**直接调用本 API 即可**，无需在游戏内输入 `/setting_open` 指令。`/setting_open` 指令仅用于游戏内/管理侧触发（由服务端处理后同样转发到 `OpenSettings`），详见[服务端 API](api-server.md)。
 
 ```python
 from CardRegistryApi import OpenSettings
@@ -917,6 +936,73 @@ OpenSettings("basic_settings", "client", "client_opt_a")
 | sub_key | str | 否 | 子卡片 key，可选 `"client"` 或 `"server"` |
 | middle_card_id | str | 否 | 中间卡片 ID（如 `"client_opt_a"`），需在 `sub_key` 指定后生效 |
 
+#### 跳转拦截 API
+
+`/setting_open` 指令触发的跳转在生效前会先抛出 `SettingsNavigateEvent`，外部模组可以监听该事件做自定义处理，也可注册拦截回调来阻止本次跳转。
+
+> 注意：`OpenSettings()` 直接调用 **不触发** 跳转拦截流程；仅 `/setting_open` 命令路径会经过拦截。
+
+##### SettingsNavigateEvent（事件常量）
+
+触发时机：客户端收到 `/setting_open` 指令、执行跳转前。
+
+事件数据：
+
+| 字段 | 类型 | 说明 |
+|------|------|------|
+| playerId | str | 发起跳转的玩家 ID |
+| main_card_id | str/None | 目标主卡片 ID |
+| sub_key | str/None | 目标子卡片 key |
+| middle_card_id | str/None | 目标中间卡片 ID |
+
+```python
+from CardRegistryApi import SettingsNavigateEvent
+import mod.client.extraClientApi as clientApi
+
+def OnNavigate(args):
+    print "准备跳转:", args.get("main_card_id")
+
+# 监听跳转前置事件（用模组的 System 监听即可）
+self.ListenForEvent(clientApi.GetEngineNamespace(),
+                    clientApi.GetEngineSystemName(),
+                    SettingsNavigateEvent,
+                    self, OnNavigate)
+```
+
+##### RegNavigateBlockCallback(callback)
+
+注册一个跳转拦截回调。回调返回 `True` 表示拦截本次跳转，返回 `False`/`None` 放行。被拦截时，客户端弹提示"跳转已被拦截"，不再打开设置。
+
+| 参数 | 类型 | 说明 |
+|------|------|------|
+| callback | function | 签名 `callback(playerId, main_card_id, sub_key, middle_card_id) -> bool` |
+
+返回 `True` 注册成功；回调已注册或为空则不重复注册。
+
+```python
+from CardRegistryApi import RegNavigateBlockCallback, UnregNavigateBlockCallback
+
+def OnNavigateShouldBlock(playerId, main_card_id, sub_key, middle_card_id):
+    # 例如：禁止跳转到某个配置页
+    if main_card_id == "basic_settings":
+        return True  # 拦截，玩家会看到"跳转已被拦截"
+    return False
+
+RegNavigateBlockCallback(OnNavigateShouldBlock)
+```
+
+##### UnregNavigateBlockCallback(callback)
+
+取消已注册的跳转拦截回调。
+
+```python
+UnregNavigateBlockCallback(OnNavigateShouldBlock)
+```
+
+##### IsNavigateBlocked(playerId, main_card_id, sub_key, middle_card_id)
+
+内部判定接口：依次调用所有拦截回调，任一返回 `True` 即判定为拦截。外部一般无需调用，仅供高级场景。
+
 #### 行为说明
 
 - **设置界面未打开时**：`PushScreen` 打开设置，UI 就绪后自动导航到指定卡片
@@ -932,6 +1018,31 @@ OpenSettings("basic_settings", "client", "client_opt_a")
 - 点击后：`CloseSettingUI()` 关闭官方设置界面 → 延迟 0.15s → `OpenSettings()` 打开本模组的 `setting.main`
 
 > 注意：`RegisterSettingInst` 第一个参数当前为模组命名空间 `Script_NeteaseMod9sPMlz0K`（开发环境预览用），正式上线需替换为开平平台上传模组后的 **ItemID**。
+
+---
+
+## 客户端调试日志开关
+
+> 对应设置界面「设置配置 > 调试 > 日志输出」开关，**每个玩家各自独立**（本地存储）。
+> 服务端侧还有一个**全局共享**的 `日志输出` 开关（仅 OP 可改），见 [API_服务端.md](api-server.md#服务端全局调试日志开关)。
+
+本框架的调试日志（客户端所有 `==== ... ====` 输出）均通过 `dlog.client_print` 输出，受该开关控制。开关关闭时吞掉这些日志，减少控制台刷屏、便于安静运行。
+
+外部模组若需直接控制框架日志，可延迟导入 `DebugLog` 单例 `dlog`：
+
+```python
+from Script_NeteaseMod9sPMlz0K.DebugLog import dlog
+dlog.set_client_enabled(False)   # 关闭框架客户端日志
+dlog.set_server_enabled(False)   # 关闭框架服务端日志
+```
+
+| 方法 | 说明 |
+|------|------|
+| `dlog.set_client_enabled(bool)` | 设置客户端日志开关，返回设置后状态 |
+| `dlog.set_server_enabled(bool)` | 设置服务端日志开关，返回设置后状态 |
+| `dlog.get_client_enabled()` / `dlog.get_server_enabled()` | 读取当前开关 |
+| `dlog.client_print(*args)` | 打印客户端日志（受客户端开关控制） |
+| `dlog.server_print(*args)` | 打印服务端日志（受服务端开关控制） |
 
 ---
 
