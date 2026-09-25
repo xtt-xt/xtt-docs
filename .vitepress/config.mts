@@ -37,6 +37,13 @@ export default defineConfig({
           { text: '服务端 API', link: '/dependency/api-server' },
           { text: '事件', link: '/dependency/api-events' }
         ]
+      },
+      {
+        text: '飞行之羽（flight-farther）',
+        collapsed: true,
+        items: [
+          { text: '指令与设置项', link: '/mods/flight-farther/commands' }
+        ]
       }
     ],
 

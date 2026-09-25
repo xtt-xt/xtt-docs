@@ -15,6 +15,14 @@
 | 服务端 API | [服务端](/dependency/api-server) |
 | 事件 | [事件](/dependency/api-events) |
 
+### 飞行之羽（flight-farther）
+
+网易我的世界 Studio 模组，提供 4 支可飞行的羽毛装备、可配置的飞行/耐久/修复/权限体系，以及 8 条模组专属设置指令。
+
+| 文档 | 链接 |
+|------|------|
+| 指令与设置项对照表 | [指令 / 键值 / 设置项](/mods/flight-farther/commands) |
+
 ## 已开源
 
 | 模组名称 | 英文名 | 开源地址 | 组件码 |
