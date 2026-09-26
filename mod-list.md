@@ -15,6 +15,10 @@
 | 服务端 API | [服务端](/dependency/api-server) |
 | 事件 | [事件](/dependency/api-events) |
 
+| 其他 | 链接 |
+|------|------|
+| 开源地址 | [xtt-xt/dependency](https://github.com/xtt-xt/dependency) |
+
 ### 飞行之羽（flight-farther）
 
 网易我的世界 Studio 模组，提供 4 支可飞行的羽毛装备、可配置的飞行/耐久/修复/权限体系，以及 8 条模组专属设置指令。
@@ -22,11 +26,11 @@
 | 文档 | 链接 |
 |------|------|
 | 指令与设置项对照表 | [指令 / 键值 / 设置项](/mods/flight-farther/commands) |
+| 开源地址 | [xtt-xt/flight-farther](https://github.com/xtt-xt/flight-farther) |
 
 ## 已开源
 
 | 模组名称 | 英文名 | 开源地址 | 组件码 |
 |---|---|---|---|
-| 飞行之羽 | flight-farther | [GitHub](https://github.com/xtt-xt/flight-farther) | 1581436 |
-| 防爆玻璃 | blast-resistant-glass | [GitHub](https://github.com/xtt-xt/flight-farther) | 7286090 |
+| 防爆玻璃 | blast-resistant-glass | [GitHub](https://github.com/xtt-xt/blast-resistant-glass) | 7286090 |
 | 流体源 | Infinite-Fluid | [GitHub](https://github.com/xtt-xt/Infinite-Fluid) | 7508276 |

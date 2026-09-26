@@ -21,4 +21,8 @@ features:
   - title: 通用模组前置（CardRegistry）
     details: 网易我的世界通用模组前置，为其他模组提供基于卡片的设置界面框架
     link: /dependency/
+
+  - title: 飞行之羽 · 指令
+    details: 飞行之羽模组的 8 条专属设置指令、46 项服务端 / 1 项客户端设置键与设置面板对照表
+    link: /mods/flight-farther/commands
 ---
