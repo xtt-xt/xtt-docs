@@ -1,7 +1,6 @@
 ---
 outline: deep
 ---
-
 # API 列表（总览）
 
 > 本模组专为外部模组提供设置界面卡片注册能力。所有公开 API 均通过 `CardRegistryApi` 统一导出。
@@ -11,13 +10,13 @@ outline: deep
 
 | 模块文件 | 职责 | 详细文档 |
 |----------|------|----------|
-| `CardRegistry.py` | 纯注册表：主卡片 / 中间卡片 / 内容项 / 弹窗 / 折叠菜单 / 事件常量 | [API_客户端.md](api-client.md) |
-| `CardRegistryApi.py` | 对外门面：再导出全部公开 API + 导航/锁定/弹窗/折叠菜单便捷封装 | [API_客户端.md](api-client.md) |
-| `SettingState.py` | 设置项持久化（`ConfigCompClient` 本地存储） | [API_客户端.md](api-client.md#设置项状态系统-api) |
-| `Toast.py` | Toast 提示系统（叠加层显示、排队播放） | [API_客户端.md](api-client.md#toast-提示-api) |
-| `DebugLog.py` | 调试日志开关（客户端/服务端独立控制，单例 `dlog`） | [API_客户端.md](api-client.md#客户端调试日志开关) |
-| `setting.py` | 框架自带"设置配置"卡片注册（含客户端/服务端"调试>日志输出"开关） | [API_服务端.md](api-server.md#服务端全局调试日志开关) |
-| `Server.py` | 服务端系统：处理 `/setting_open` 自定义指令 + 全局日志开关（OP 鉴权/同步） | [API_服务端.md](api-server.md) |
+| `CardRegistry.py` | 纯注册表：主卡片 / 中间卡片 / 内容项 / 弹窗 / 折叠菜单 / 事件常量 | [api-client.md](api-client.md) |
+| `CardRegistryApi.py` | 对外门面：再导出全部公开 API + 导航/锁定/弹窗/折叠菜单便捷封装 | [api-client.md](api-client.md) |
+| `SettingState.py` | 设置项持久化（`ConfigCompClient` 本地存储） | [api-client.md](api-client.md#设置项状态系统-api) |
+| `Toast.py` | Toast 提示系统（叠加层显示、排队播放） | [api-client.md](api-client.md#toast-提示-api) |
+| `DebugLog.py` | 调试日志开关（客户端/服务端独立控制，单例 `dlog`） | [api-client.md](api-client.md#客户端调试日志开关) |
+| `setting.py` | 框架自带"设置配置"卡片注册（含客户端/服务端"调试>日志输出"开关、重置按钮） | [api-server.md](api-server.md#服务端全局调试日志开关) |
+| `Server.py` | 服务端系统：处理 `/setting_open` 自定义指令 + 全局日志开关（OP 鉴权/同步）+ 重置本页（服务端权威重置 + 广播全服） | [api-server.md](api-server.md) |
 
 ## 导入方式
 
@@ -78,7 +77,7 @@ from CardRegistryApi import (
 
 ## API 快速索引
 
-### 客户端 API（详见 [API_客户端.md](api-client.md)）
+### 客户端 API（详见 [api-client.md](api-client.md)）
 
 | 分类 | API |
 |------|-----|
@@ -96,13 +95,13 @@ from CardRegistryApi import (
 | 跳转拦截 | `SettingsNavigateEvent` `RegNavigateBlockCallback` `UnregNavigateBlockCallback` `IsNavigateBlocked` |
 | Toast | `ShowToast` `ToastTop` `ToastTopRight` `ToastUnder` |
 
-### 服务端 API（详见 [API_服务端.md](api-server.md)）
+### 服务端 API（详见 [api-server.md](api-server.md)）
 
 | 分类 | API |
 |------|-----|
 | 自定义指令 | `/setting_open`（`setting_open`） |
 
-### 事件（详见 [API_事件.md](api-events.md)）
+### 事件（详见 [api-events.md](api-events.md)）
 
 | 分类 | 事件常量 |
 |------|----------|

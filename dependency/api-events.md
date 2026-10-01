@@ -1,11 +1,10 @@
 ---
 outline: deep
 ---
-
 # 事件说明
 
 > 本模组通过引擎事件系统抛出多种自定义事件。外部模组可用 `ListenForEvent` 监听。
-> 客户端 API 见 [API_客户端.md](api-client.md)，服务端 API 见 [API_服务端.md](api-server.md)，总览见 [API_列表.md](api-overview.md)。
+> 客户端 API 见 [api-client.md](api-client.md)，服务端 API 见 [api-server.md](api-server.md)，总览见 [api-overview.md](api-overview.md)。
 
 ## 事件总览
 
@@ -80,7 +79,7 @@ class MyExternalSystem(ClientSystem):
 
 ## 指令打开设置事件（服务端 → 客户端）
 
-由 `/setting_open` 指令触发（见 [API_服务端.md](api-server.md)），`MyServerSystem` 将 `NotifyToClient` 到目标客户端。外部模组如需在指令打开设置时做额外处理，可监听：
+由 `/setting_open` 指令触发（见 [api-server.md](api-server.md)），`MyServerSystem` 将 `NotifyToClient` 到目标客户端。外部模组如需在指令打开设置时做额外处理，可监听：
 
 ```python
 class MyClientSystem(ClientSystem):
@@ -99,15 +98,3 @@ class MyClientSystem(ClientSystem):
         print "==== open settings via command: main=%s sub=%s middle=%s ====" % (
             main_card_id, sub_key, middle_card_id)
 ```
-
-## 调试日志开关事件（客户端 ↔ 服务端）
-
-由"设置配置"服务端"调试 > 日志输出"开关触发，用于同步服务端全局日志开关状态（见 [API_服务端.md](api-server.md#服务端全局调试日志开关)）。事件名均以 `Script_NeteaseMod9sPMlz0K_` 为前缀：
-
-| 事件名（后缀） | 方向 | 触发时机 | 数据 |
-|----------------|------|----------|------|
-| `ReqServerLog` | client → server | 客户端打开服务端调试分类、请求当前值 | `{playerId}` |
-| `SetServerLog` | client → server | 客户端切换全局日志开关 | `{playerId, enabled}` |
-| `ServerLogSync` | server → client | 服务端下发全局值与被下发者 OP 状态 | `{enabled, is_op}` |
-
-> 这些是框架内部自管理事件，外部一般无需监听。若确需监听，注意力事件名自带唯一前缀，勿使用裸事件名。
