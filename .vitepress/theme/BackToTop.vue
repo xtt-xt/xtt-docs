@@ -74,12 +74,12 @@ watch(
       class="btt-btn"
       type="button"
       aria-label="回到顶部"
+      title="回到顶部"
       @click="toTop"
     >
-      <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+      <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
         <path d="M12 5l7 7-1.4 1.4L13 8.8V19h-2V8.8L6.4 13.4 5 12z" fill="currentColor" />
       </svg>
-      <span>顶部</span>
     </button>
   </Transition>
 </template>
@@ -87,25 +87,29 @@ watch(
 <style scoped>
 .btt-btn {
   position: fixed;
-  right: 24px;
-  bottom: 32px;
+  right: 26px;
+  bottom: 34px;
   z-index: 40;
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  padding: 8px 12px;
-  border-radius: 9999px;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  padding: 0;
+  border-radius: 50%;
   border: 1px solid var(--vp-c-divider);
   background: var(--vp-c-bg-soft);
   color: var(--vp-c-text-1);
-  font-size: 13px;
-  line-height: 1;
   cursor: pointer;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
   transition: opacity 0.25s ease, transform 0.25s ease, background-color 0.2s ease;
+}
+.btt-btn svg {
+  display: block;
 }
 .btt-btn:hover {
   background: var(--vp-c-bg-mute);
+  transform: translateY(-1px);
 }
 .btt-enter-from,
 .btt-leave-to {
@@ -115,8 +119,14 @@ watch(
 @media (max-width: 768px) {
   .btt-btn {
     right: 14px;
-    bottom: 22px;
-    padding: 8px 10px;
+    bottom: 20px;
+    width: 42px;
+    height: 42px;
+  }
+  .btt-btn svg {
+    width: 20px;
+    height: 20px;
   }
 }
 </style>
+

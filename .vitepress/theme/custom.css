@@ -1,0 +1,23 @@
+/* ===== 表格紧凑化（文档站全局） ===== */
+.vp-doc table {
+  font-size: 13.5px;
+}
+
+.vp-doc th,
+.vp-doc td {
+  padding: 6px 10px;
+  line-height: 1.5;
+  vertical-align: top;
+}
+
+/* 第一列（键名 / 参数名）不折行，避免被拆成多行把行高拉高 */
+.vp-doc th:first-child,
+.vp-doc td:first-child {
+  white-space: nowrap;
+}
+
+/* 表格里的行内代码不折行、略小一号 */
+.vp-doc table code {
+  white-space: nowrap;
+  font-size: 12.5px;
+}
