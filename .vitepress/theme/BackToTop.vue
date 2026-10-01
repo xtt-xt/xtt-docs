@@ -8,6 +8,8 @@ const THRESHOLD = 400
 
 let lastY = 0
 let ticking = false
+// 点击后平滑回顶期间临时忽略滚动判断，避免按钮又闪出来
+let suppress = false
 
 function isHome() {
   const p = route.path || ''
@@ -19,6 +21,11 @@ function onScroll() {
   ticking = true
   requestAnimationFrame(() => {
     const y = window.scrollY || document.documentElement.scrollTop || 0
+    if (suppress) {
+      lastY = y
+      ticking = false
+      return
+    }
     if (isHome() || y <= THRESHOLD) {
       visible.value = false
     } else if (y < lastY) {
@@ -35,7 +42,11 @@ function onScroll() {
 
 function toTop() {
   visible.value = false
+  suppress = true
   window.scrollTo({ top: 0, behavior: 'smooth' })
+  window.setTimeout(() => {
+    suppress = false
+  }, 900)
 }
 
 onMounted(() => {
