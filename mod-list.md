@@ -1,5 +1,5 @@
 # 模组列表
-本页面模组均使用 [GPL-3.0](https://www.gnu.org/licenses/gpl-3.0.html) 协议开源。
+本页面模组除特殊说明外均使用 [GPL-3.0](https://www.gnu.org/licenses/gpl-3.0.html) 协议开源。
 
 ## 已有api文档
 
