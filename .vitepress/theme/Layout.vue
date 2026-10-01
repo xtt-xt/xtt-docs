@@ -1,5 +1,6 @@
 <script setup>
 import DefaultTheme from 'vitepress/theme'
+import BackToTop from './BackToTop.vue'
 </script>
 
 <template>
@@ -9,6 +10,9 @@ import DefaultTheme from 'vitepress/theme'
         <img src="/logo.png" alt="logo">
         <span>星天模组文档</span>
       </div>
+    </template>
+    <template #layout-bottom>
+      <BackToTop />
     </template>
   </DefaultTheme.Layout>
 </template>
