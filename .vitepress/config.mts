@@ -44,6 +44,13 @@ export default defineConfig({
         items: [
           { text: '指令与设置项', link: '/mods/flight-farther/commands' }
         ]
+      },
+      {
+        text: '防爆玻璃（blast-resistant-glass）',
+        collapsed: true,
+        items: [
+          { text: '指令与设置项', link: '/mods/blast-resistant-glass/commands' }
+        ]
       }
     ],
 

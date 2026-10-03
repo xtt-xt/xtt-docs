@@ -28,9 +28,18 @@
 | 指令与设置项对照表 | [指令 / 键值 / 设置项](/mods/flight-farther/commands) |
 | 开源地址 | [xtt-xt/flight-farther](https://github.com/xtt-xt/flight-farther) |
 
+### 防爆玻璃（blast-resistant-glass）
+
+网易我的世界 Studio 模组，添加防爆玻璃与钢化玻璃两个系列共 36 种方块，提供 640 条动态注册的染色配方，以及 4 条模组专属服务端设置指令。
+
+| 文档 | 链接 |
+|------|------|
+| 指令与设置项对照表 | [指令 / 键值 / 设置项](/mods/blast-resistant-glass/commands) |
+| 开源地址 | [xtt-xt/blast-resistant-glass](https://github.com/xtt-xt/blast-resistant-glass) |
+| 组件码 | 7286090 |
+
 ## 已开源
 
 | 模组名称 | 英文名 | 开源地址 | 组件码 |
 |---|---|---|---|
-| 防爆玻璃 | blast-resistant-glass | [GitHub](https://github.com/xtt-xt/blast-resistant-glass) | 7286090 |
 | 流体源 | Infinite-Fluid | [GitHub](https://github.com/xtt-xt/Infinite-Fluid) | 7508276 |
