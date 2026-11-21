@@ -4,6 +4,7 @@ outline: deep
 # 通用模组前置（CardRegistry）
 
 > 仓库：[xtt-xt/dependency](https://github.com/xtt-xt/dependency)
+
 网易我的世界（NetEase MC）Studio 前置模组，为其他模组提供一套**基于卡片的设置界面框架**（`CardRegistry`）。
 
 ## 功能特性
@@ -13,6 +14,7 @@ outline: deep
 - **弹窗系统**：通用确认弹窗（内容超长自动滚动，支持自定义按钮）
 - **折叠菜单**：单选式下拉菜单，选中状态自动持久化
 - **组合开关弹窗**：普通按钮打开弹窗，支持物品/纯文字/编辑框三种行控件混合、行级锁定（开关内置锁定贴图 / 编辑框 lock 覆盖层）、单选/多选、弹窗内容超出自动滚动，可注册底部自定义按钮，状态独立持久化
+- **物品选择**：内容项右侧显示选中物品图标 + 箭头按钮，点开为 8 列网格弹窗（搜索框按 identifier / 显示名过滤、翻页、点「确定」才写回），可列出原版与模组全部物品，选中状态自动持久化
 - **Toast 提示**：顶部 / 右上 / 底部轻量提示，支持物品与图片图层、自定义文字与颜色、同位置排队播放；可自定义入场/出场音效与背景贴图（九宫格剪裁）
 - **设置持久化**：开关 / 输入框 / 锁定状态自动保存到本地存储
 - **重置本页**：客户端重置本地存储；服务端分组额外重置服务端权威默认值并**广播全服**（OP 鉴权，参考 FlyArmor 方法）
@@ -23,9 +25,10 @@ outline: deep
 | 方式 | 说明 |
 |------|------|
 | **U 键** | 默认打开方式（可在游戏设置中改键），**ESC 关闭** |
-| **暂停菜单 → 模组设置按钮** | 向暂停界面注入"模组设置"按钮 |
-| **官方设置入口** | 暂停菜单 → 模组 → 本模组 → 点"打开设置"按钮，关闭官方界面并打开本模组设置界面 |
+| **官方设置入口** | 暂停菜单 → 模组设置 → 选中本模组 → 点"打开设置"按钮，关闭官方界面并打开本模组设置界面 |
 | **导航 API** | 外部模组可直接调用 `OpenSettings(main_card_id, sub_key, middle_card_id)` 打开并导航到指定卡片，详见[导航 API](api-client.md#导航-api) |
+
+> 本模组**不再向原生暂停界面注入按钮**：平台自 2026-12-01 起机审拦截开发者对原生 `pause_screen` / `settings_screen` 的修改，入口统一走网易官方「通用设置」接口注册。
 
 > 若要在游戏内以指令方式打开/导航自己的设置界面，可使用 `/setting_open` 命令（对所有成员可用，但只作用于调用者自己），详见[服务端 API](api-server.md)。
 
@@ -46,12 +49,12 @@ outline: deep
 │   │   └── Toast.py                      # Toast 提示系统
 │   └── netease_commands/                 # 自定义指令定义（setting_open）
 ├── resource_pack_nka0OOhF/
-│   └── ui/                               # JSON UI（setting / pop_up / toast / pause_screen ...）
+│   └── ui/                               # JSON UI（setting / pop_up / toast / mod_settings_button ...）
 ├── README.md                             # 本文件
-├── api-overview.md                           # API 总览、导入方式、快速索引、外部模组集成要求
-├── api-client.md                         # 客户端 API 详细文档
-├── api-server.md                         # 服务端 API（/setting_open 指令）
-└── api-events.md                           # 全部事件说明
+├── API_列表.md                           # API 总览、导入方式、快速索引、外部模组集成要求
+├── API_客户端.md                         # 客户端 API 详细文档
+├── API_服务端.md                         # 服务端 API（/setting_open 指令）
+└── API_事件.md                           # 全部事件说明
 ```
 
 ## 快速开始（外部模组接入）
