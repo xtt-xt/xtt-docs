@@ -18,6 +18,7 @@
 | 其他 | 链接 |
 |------|------|
 | 开源地址 | [xtt-xt/dependency](https://github.com/xtt-xt/dependency) |
+| 开源协议 | [LGPL-3.0](https://www.gnu.org/licenses/lgpl-3.0.html) |
 
 ### 飞行之羽（flight-farther）
 
